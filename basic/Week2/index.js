@@ -126,7 +126,6 @@ function fiboV2(indx) {
 
 // console.log(fiboV2(50));
 
-
 function fiboV3(indx, cache = [0, 1, 1]) {
 
     if(indx === 1 || indx === 2 || cache[indx])
