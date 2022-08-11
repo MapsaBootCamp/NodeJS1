@@ -1,4 +1,4 @@
-const prompt = require("prompt")
+const prompt = require('prompt-sync')();
 const fs = require('fs');
 
 fs.readFile("text.txt", "utf-8", (data, err) => { 
