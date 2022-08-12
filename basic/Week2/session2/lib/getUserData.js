@@ -1,6 +1,8 @@
-const prompt = require('prompt-sync')();
-const fs = require('fs');
+// const prompt = require('prompt-sync')();
+import promptSync from 'prompt-sync';
+import * as fs from "fs"
 
+const prompt = promptSync()
 
 function getData() {
     let n = prompt('Namat ro Begu: ');
@@ -30,9 +32,11 @@ function getData() {
         console.log("copy shod");
     })
 }
-const name = "Ashkan"
+export const name = "Ashkan"
 
-module.exports = {
-    getData,
-    name
-}
+export default getData;
+
+// module.exports = {
+//     getData,
+//     name
+// }

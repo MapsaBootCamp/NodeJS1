@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "salam bar node",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon index.js"
   },
   "author": "Ashkan",
   "license": "MIT",
