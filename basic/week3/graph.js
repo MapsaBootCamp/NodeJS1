@@ -1,11 +1,11 @@
 class Graph{
 
     constructor(){
-        this._adjMatrix = {}
+        this._adjMatrix = {};
     }
 
     addNode(nodeName){
-        if(nodeName in Object.keys(this._adjMatrix))
+        if(nodeName in this._adjMatrix)
             return null;
         this._adjMatrix[nodeName] = []
     }
@@ -16,6 +16,7 @@ class Graph{
         this._adjMatrix[nodeName1].push(nodeName2)
         this._adjMatrix[nodeName2].push(nodeName1)
     }
+    
     findNeghbors(nodeName, neghborsArray=[]){
         for(let elm of this._adjMatrix[nodeName]){
             if(!neghborsArray.includes(elm)){
@@ -46,6 +47,15 @@ class Graph{
     }
 }
 
+class DirectedGraph extends Graph{
+
+}
+
+
+Graph.prototype.jahat = function () {
+    console.log("salam man protoam");
+};
+
 
 const g1 = new Graph();
 g1.addNode(1)
@@ -64,7 +74,9 @@ g1.addEdge(1, 6)
 g1.addEdge(2, 4)
 g1.addEdge(5, 7)
 
-console.log(g1.isConnected());
+const g2 = new DirectedGraph()
+console.log(g2.jahat());
 
+// console.log(g1.isConnected());
+// console.log(g1.jahat)
 // g1.display()
-
