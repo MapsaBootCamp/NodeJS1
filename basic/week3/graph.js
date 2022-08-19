@@ -16,12 +16,12 @@ class Graph{
         this._adjMatrix[nodeName1].push(nodeName2)
         this._adjMatrix[nodeName2].push(nodeName1)
     }
-    
-    findNeghbors(nodeName, neghborsArray=[]){
+
+    findAllNodeCanGo(nodeName, neghborsArray=[]){
         for(let elm of this._adjMatrix[nodeName]){
             if(!neghborsArray.includes(elm)){
                 neghborsArray.push(elm);
-                neghborsArray.concat(this.findNeghbors(elm, neghborsArray))
+                neghborsArray.concat(this.findAllNodeCanGo(elm, neghborsArray))
             }
         }
         return neghborsArray;
@@ -30,7 +30,7 @@ class Graph{
     isConnected(){
         if(Object.keys(this._adjMatrix).length < 2)
             return true;
-        const result = this.findNeghbors(Object.keys(this._adjMatrix)[0])
+        const result = this.findAllNodeCanGo(Object.keys(this._adjMatrix)[0])
         console.log(result);
         if(result.length === Object.keys(this._adjMatrix).length)
             return true;
