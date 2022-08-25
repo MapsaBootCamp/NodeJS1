@@ -41,27 +41,22 @@ class Graph{
         return this._adjMatrix[nodeName].filter((elm) => !visitedNode.includes(elm))
     }
 
-    findPath(nodeName1, nodeName2, path=[nodeName1], visitedNode=[]){
-        visitedNode.push(nodeName1)
-        for(let elm of this._adjMatrix[nodeName1]){
-            if(elm == nodeName2){
-                path.push(elm)
-                return path
-            }else if(visitedNode.includes(elm)){
-                continue;
-            }
-            else if(!this._checkExistUnvisitedNeghbor(elm, visitedNode)){
-                return null;
-            }
+    findPath(nodeName1, nodeName2, path=[], visitedNode=[]){
+        
+        path.push(nodeName1);
+        visitedNode.push(nodeName1);
 
-            if(!visitedNode.includes(elm)){
-                path.push(elm)
-                if(this.findPath(elm, nodeName2, path, visitedNode) === null){
-                    path.pop()
+        if(nodeName1 == nodeName2)
+            console.log(path);
+        else{
+            for(let node of this._adjMatrix[nodeName1]){
+                if(!visitedNode.includes(node)){
+                    this.findPath(node, nodeName2, path, visitedNode)
                 }
             }
         }
-        return path;
+        path.pop();
+        visitedNode.pop();  
     }
 
     display(){
@@ -88,18 +83,22 @@ g1.addNode(5)
 g1.addNode(6)
 g1.addNode(6)
 g1.addNode(7)
+g1.addNode(8)
 
 g1.addEdge(1, 2)
 g1.addEdge(1, 3)
 g1.addEdge(3, 5)
 g1.addEdge(1, 6)
+g1.addEdge(2, 6)
 g1.addEdge(2, 4)
 g1.addEdge(5, 7)
+g1.addEdge(6, 8)
+g1.addEdge(7, 8)
 
 // const g2 = new DirectedGraph()
 // console.log(g2.jahat());
 
-console.log(g1.findPath(1, 4));
+g1.findPath(1, 7);
 
 // console.log(g1.isConnected());
 // console.log(g1.jahat)
