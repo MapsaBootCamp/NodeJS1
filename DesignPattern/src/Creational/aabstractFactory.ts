@@ -26,7 +26,7 @@ class MacFactory implements GUIFactory{
 
 abstract class Button{
     
-    public abstract theme();
+    public abstract theme(): void;
 
     public onClick(){
         console.log("on click!")
@@ -48,7 +48,7 @@ class MacButton extends Button{
 
 abstract class CheckBox{
 
-    public abstract tickTheme();
+    public abstract tickTheme(): void;
 
     public onTick(){
         console.log("!tick flag")
@@ -98,3 +98,4 @@ console.log("create GUI Mac....");
 const guiObjMac = new WinFactory()
 const appObj2 = new Application(guiObjMac)
 appObj2.createUI()
+
