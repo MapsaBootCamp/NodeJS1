@@ -1,0 +1,11 @@
+NETWORK =====> 5 layers =====> application + transport + network + dataLink + physical
+
+
+HTTP   ----> protocole in application layer
+
+        request ====> GET, POST, PUT/PATCH, DELETE, ...
+        response =====> 1**, 2**, 3**, 4**, 5**
+
+
+
+domainName:port/users ====> path = /users
