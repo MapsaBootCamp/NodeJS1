@@ -4,13 +4,18 @@ const app = express()
 
 app.use(express.json())
 
-app.get("/", (req, res) => {
+const logger = (req, res, next) => {
+    console.log("salam");
+    next();
+}
+
+
+app.get("/", logger, logger, logger, (req, res) => {
     res.send("welcome!");
 })
 
-
 const userRouter = require("./routes/user")
-app.use("/users", userRouter)
+app.use("/users",  userRouter)
 
 const PORT = 3000;
 app.listen(PORT, () => {
