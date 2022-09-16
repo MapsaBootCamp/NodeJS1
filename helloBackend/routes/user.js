@@ -1,6 +1,6 @@
 const express = require("express")
 const db = require("../config/database")
-const getUser = require("../utils")
+const {getUser} = require("../utils")
 
 const router = express.Router()
 

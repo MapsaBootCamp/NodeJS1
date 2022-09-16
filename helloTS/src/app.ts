@@ -178,3 +178,6 @@ const myObj = new B("Ashkan");
 console.log(myObj.salamKardan())
 
 
+const testMap = new Map()
+testMap.set("a", "abc")
+console.log(testMap);

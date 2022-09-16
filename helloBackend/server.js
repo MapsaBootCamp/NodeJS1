@@ -17,6 +17,9 @@ app.get("/", logger, logger, logger, (req, res) => {
 const userRouter = require("./routes/user")
 app.use("/users",  userRouter)
 
+const foodRouter = require("./routes/food")
+app.use("/food",  foodRouter)
+
 const PORT = 3000;
 app.listen(PORT, () => {
     console.log(`server listen on ${PORT}`);
