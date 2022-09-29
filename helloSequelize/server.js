@@ -1,5 +1,7 @@
-const sequelize = require("./sequelize")
+const sequelize = require("./sequelize");
+const app = require("./express");
 
+const PORT = 3000;
 
 async function assertDatabaseConnectionOk() {
 	console.log(`Checking database connection...`);
@@ -16,7 +18,10 @@ async function assertDatabaseConnectionOk() {
 
 async function init(){
     try {
-        await assertDatabaseConnectionOk()
+        await assertDatabaseConnectionOk();
+		app.listen(PORT, () => {
+			console.log(`app listen on port ${PORT}`);
+		})
     } catch (error) {
         
     }
