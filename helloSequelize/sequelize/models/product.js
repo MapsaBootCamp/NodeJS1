@@ -18,6 +18,10 @@ module.exports = (sequelize) => {
     price : {
         allowNull: true,
         type: DataTypes.INTEGER, 
+    },
+    qty : {
+        allowNull: true,
+        type: DataTypes.INTEGER
     }
  })   
 }

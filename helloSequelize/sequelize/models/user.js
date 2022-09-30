@@ -1,4 +1,5 @@
 const { DataTypes } = require("sequelize")
+const md5 = require('md5');
 
 
 module.exports = (sequelize) => {
@@ -23,7 +24,10 @@ module.exports = (sequelize) => {
     },
     password: {
         allowNull : false,
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        set(value){
+            this.setDataValue("password", md5(value))
+        }
     },
     nickName: {
         allowNull: true, 
@@ -33,6 +37,16 @@ module.exports = (sequelize) => {
         defaultValue: "GholiKhan",
         allowNull: false, 
         type: DataTypes.STRING
-    }
+    },
+    role: {
+        type: DataTypes.ENUM(["superuser", "staff", "active", "notActive"]),
+        defaultValue: "active"
+    } 
+ }, {
+     hooks: {
+        beforeValidate: (user, option) => {
+            console.log("hellllo");
+        }
+     }
  })   
 }

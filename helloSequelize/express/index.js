@@ -1,9 +1,11 @@
 const express = require("express");
 
 const app = express()
+app.use(express.json());
 
 const routeDefine = [
-    ["/user", require("./routes/user")]
+    ["/user", require("./routes/user")],
+    ["/product", require("./routes/product")]
 ]
 
 
