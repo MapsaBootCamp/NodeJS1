@@ -20,7 +20,7 @@ const login = async(req, res) => {
         const validPassword = await bcrypt.compare(req.body.password, user.password);
 
         if(validPassword){
-            const token = await jwt.sign({ username: user.username }, process.env.SECRET_KEY, { expiresIn: 60 * 60 }, { algorithm: 'HS256' });
+            const token = jwt.sign({ username: user.username }, process.env.SECRET_KEY, { expiresIn: 60 * 60 }, { algorithm: 'HS256' });
             return res.status(200).send({
                 status: "success",
                 message: "user login shod",
@@ -60,10 +60,10 @@ const register = async(req, res) => {
                 data: null
             })
         }
-        
-        const userObj = db.User.build(req.body)
+        const {username, password} = req.body
+        const userObj = db.User.build({username, password})
         const salt = await bcrypt.genSalt(10);
-        userObj.password = await bcrypt.hash(req.body.password, salt);
+        userObj.password = await bcrypt.hash(password, salt);
         await userObj.save();
 
         return res.status(201).send({

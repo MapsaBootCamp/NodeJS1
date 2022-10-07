@@ -1,0 +1,12 @@
+extends base.pug
+
+
+block title 
+    title HomePage 
+
+block content 
+    ul(id="user-show")
+        each user in users
+            li= user
+    block script
+        script(src="js/main.js") 

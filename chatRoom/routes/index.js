@@ -5,6 +5,7 @@ app.use(express.json());
 
 const routeDefiner = [
     ["/auth", require("./auth")],
+    ["/chat", require("./chat")],
 ]
 
 
