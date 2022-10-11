@@ -2,6 +2,7 @@ require('dotenv').config();
 const path = require("path")
 const express = require("express");
 const app = require("./routes");
+const {userSession} = require("./middlewares/authentication")
 
 app.use(express.static(path.join(__dirname, "public")))
 
@@ -10,8 +11,8 @@ app.set("view engine", "pug")
 
 users = ["Ashkan", "Asghar", "Gholam"]
 
-app.get("/", (req, res) => {
-    return res.render("index", {users})
+app.get("/", userSession,(req, res) => {
+    return res.render("index", {users, req})
 })
 
 app.listen(process.env.PORT, ()=> {

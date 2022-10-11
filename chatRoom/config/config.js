@@ -1,7 +1,16 @@
-{
+require('dotenv').config();
+
+console.log(process.env.DB_USER);
+console.log(process.env.DB_PASS);
+console.log(process.env.DB_NAME);
+
+module.exports = {
   "development": {
-    "storage": "db.sqlite",
-    "dialect": "sqlite"
+    "username": process.env.DB_USER,
+    "password": process.env.DB_PASS,
+    "database": process.env.DB_NAME,
+    "host": "127.0.0.1",
+    "dialect": "postgres"
   },
   "test": {
     "username": "root",

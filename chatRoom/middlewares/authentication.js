@@ -2,7 +2,7 @@ const { verify }= require("jsonwebtoken")
 const db = require("../models")
 
 const jwtTokenAuthentication = async(req, res, next) => {
-    const token = req.headers.authorization;
+    const token = req.headers.authorization || req.cookies["access-token"];
     let verifiedToken;
     if(!token){
         return res.sendStatus(401);
@@ -41,7 +41,28 @@ const jwtTokenAuthentication = async(req, res, next) => {
     })
 }
 
+const userSession = async(req, res, next) => {
+    const token = req.cookies["access-token"];
+    try {
+        verifiedToken = verify(token, process.env.SECRET_KEY);
+        req.user = await db.User.findOne({
+                    where: {
+                            username: verifiedToken.username
+                        },
+                    attributes: {
+                        exclude: ["password"]
+                    }})
+        req.authenticated = true
+    } catch (error) {
+        req.user = null;
+        req.authenticated = false;
+    }
+    next();
+}
+
+
 
 module.exports = {
     jwtTokenAuthentication,
+    userSession
 }

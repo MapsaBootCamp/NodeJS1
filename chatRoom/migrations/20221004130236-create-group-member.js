@@ -12,7 +12,7 @@ module.exports = {
       UserId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'User', // name of Target model
+          model: 'Users', // name of Target model
           key: 'id', // key in Target model that we're referencing
         },
         onUpdate: 'CASCADE',
@@ -21,7 +21,7 @@ module.exports = {
       GroupId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Group', // name of Target model
+          model: 'Groups', // name of Target model
           key: 'id', // key in Target model that we're referencing
         },
         onUpdate: 'CASCADE',

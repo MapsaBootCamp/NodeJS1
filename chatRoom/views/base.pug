@@ -1,14 +1,27 @@
 doctype html
+
 html(lang="en")
     head
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        link(rel="stylesheet", href="css/style.css")
+        link(rel="stylesheet", href="/css/style.css")
         block title
     body
-        
+        div
+            .header
+                p header
+                if !req.user
+                    a(href="/auth/login-form") login
+                else 
+                    p welcome #{req.user.username}
+                    a(href="/auth/logout") logout
+                a(href="/") home
+
         block content
 
+        div 
+            .footer
+                p footer
         block script 
-            script(src="js/main.js") 
+            script(src="/js/main.js") 

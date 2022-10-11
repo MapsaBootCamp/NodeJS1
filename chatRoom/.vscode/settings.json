@@ -9,6 +9,16 @@
             "database": "airlines",
             "username": "ashkan",
             "password": "mapsa1234"
+        },
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "chatroom",
+            "database": "chatroom",
+            "username": "mapsa",
+            "password": "mapsa1234"
         }
     ],
     "compile-hero.disable-compile-files-on-did-save-code": true

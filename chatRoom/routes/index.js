@@ -1,9 +1,11 @@
 const express = require("express");
-const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
 
 const app = express();
+
 app.use(express.json());
-app.use(bodyParser());
+app.use(express.urlencoded());
+app.use(cookieParser());
 
 const routeAPIDefiner = [
     ["/auth", require("./api/auth")],
@@ -15,7 +17,7 @@ const routeViewsDefiner = [
 ]
 
 for(const route of routeAPIDefiner){
-    app.use(`/api/${route[0]}`, route[1]);
+    app.use(`/api${route[0]}`, route[1]);
 }
 
 for(const route of routeViewsDefiner){
