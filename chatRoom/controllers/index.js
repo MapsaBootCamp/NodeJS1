@@ -1,2 +1,3 @@
-exports.auth = require("./auth")
-exports.chat = require("./chat")
+exports.authAPI = require("./api/auth")
+exports.chatAPI = require("./api/chat")
+exports.authTemplate = require("./view/auth")
