@@ -7,6 +7,7 @@ const { jwtTokenAuthentication }= require("../../middlewares/authentication")
 const router = express.Router();
 
 router.get("/list", jwtTokenAuthentication, chatAPI.getAllChats);
+router.post("/create-group", jwtTokenAuthentication, chatAPI.createGroup);
 
 
 
