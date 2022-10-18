@@ -8,6 +8,8 @@ const router = express.Router();
 
 router.get("/list", jwtTokenAuthentication, chatAPI.getAllChats);
 router.post("/create-group", jwtTokenAuthentication, chatAPI.createGroup);
+router.post("/add-group-member", jwtTokenAuthentication, chatAPI.addGroupMembers);
+router.get("/group-member/:id", chatAPI.getAllMembersOfOneGroup);
 
 
 

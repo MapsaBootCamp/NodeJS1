@@ -1,17 +1,22 @@
 const { user } = require("pg/lib/defaults");
+const { where } = require("sequelize");
 const db = require("../../models");
 
 const getAllChats = async(req, res) => {
     try {
         
-        const chats = await db.Group.findAll({
-            include : [{
-                model: db.User,
-                as: "members",
-                where: { username: req.user.username},
-                attributes: []
+        const chats = await db.GroupMember.findAll({
+            where: {
+                UserId: req.user.id,
+               
+            },
+            include: [{
+                model: db.Group,
+                attributes: ["name", "public"]
             }],
-            attributes: ["id", "name", "public"]
+            attributes: {
+                exclude: ["UserId"]
+            }
         })
 
         return res.send(chats)
@@ -59,9 +64,74 @@ const createGroup = async (req, res) => {
 
 }
 
-const addGroupMembers = (req, res) => {
+
+const addGroupMembers = async (req, res) => {
+
+    const groupId = req.body.groupId;
+    const addedUserId = req.body.addedUserId;
+    
+    try {
+        
+        const groupMemberObj = await db.GroupMember.findOne({
+            include: [{
+                model: db.User,
+                where: {username: req.user.username},
+                attributes: []
+            },{
+                model: db.Group,
+                where: {id: groupId},
+                attributes: []
+            }],
+            attributes : ["type"]
+        })
+
+        if(!groupMemberObj || groupMemberObj.type !== "admin"){
+            return res.sendStatus(403)
+        }
+
+        await db.GroupMember.findOrCreate({
+            where: {
+                UserId: addedUserId,
+                GroupId: groupId,
+                type: "member"
+            }
+        })
+
+        return res.status(201).send("user add shod")
+
+    } catch (error) {
+        return res.send({
+            "status": "error",
+            "message": error.message
+        })
+    }
+}
+
+const getAllMembersOfOneGroup = async(req, res) => {
+    const groupId = req.params.id
+    const members = await db.Group.findOne({
+        where: {
+            id: groupId
+        },
+        include: [{
+            model: db.GroupMember,
+            include: [{
+                model: db.User,
+                attributes: ["username"]
+            }],
+            attributes: ["type"]
+        }]
+    })
+
+    return res.send(members)
+}
+
+
+
+const checkUserExist = async (req, res) => {
 
 }
+
 
 const createPrivateChatTables = (req, res) => {
 
@@ -76,8 +146,17 @@ const getChatMessage = async (req, res) => {
 
 }
 
+const deleteGroup = async (req, res) => {
+
+}
+
+const editGroupName = async (req, res) => {
+
+}
 
 module.exports = {
     getAllChats,
-    createGroup
+    createGroup,
+    addGroupMembers,
+    getAllMembersOfOneGroup
 }
