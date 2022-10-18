@@ -5,11 +5,15 @@ const jwtTokenAuthentication = async(req, res, next) => {
     const token = req.headers.authorization || req.cookies["access-token"];
     let verifiedToken;
     if(!token){
-        return res.sendStatus(401);
+        return res.redirect("auth/login-form");
     }else{
         try {
-            const jwtToken = token.split(" ")[1];
-            verifiedToken = verify(jwtToken, process.env.SECRET_KEY);
+            if(token.includes("Bearer")){
+                const jwtToken = token.split(" ")[1];
+                verifiedToken = verify(jwtToken, process.env.SECRET_KEY);
+            }else{
+                verifiedToken = verify(token, process.env.SECRET_KEY);
+            }
             
         } catch (error) {
             return res.status(400).send({

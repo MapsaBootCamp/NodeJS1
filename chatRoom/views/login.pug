@@ -3,8 +3,15 @@ extends base.pug
 block title 
     title login 
 
-block content 
-    form(method="post")
-        input(type="text", name="username", placeholder="username")
-        input(type="text", name="password", placeholder="password")
-        input(type="submit", value="login")
+block content
+    div.login-form
+        div.log-form-content
+            form(method="post")
+                div
+                    label(for="username") username:
+                    input(type="text", name="username", id="username")
+                div
+                    label(for="password") password:
+                    input(type="text", name="password", id="password")
+                div
+                    input.button(type="submit", value="Login")

@@ -1,19 +1,61 @@
-#user-show {
+#chat-list-container {
     display: flex;
-    flex-direction: row;    
+    flex-direction: column;    
     color: blue;
     list-style-type: none;
 }
 
-#user-show li {
+.chat-list-element {
     padding: 20px 10px;
     margin: 10px;
     border: 2px solid green;
 }
 
+#chat-list-container a{
+  text-decoration: none;
+}
 
 .header a {
-  margin-right: 5px;
+  margin-right: 10px;
+  text-decoration: none;
+  border: solid;
+  padding: 10px;
+  color: aliceblue;
+  background-color: blue;
+}
+
+.header a:hover{
+  color: burlywood;
+}
+
+.login-form {
+  display:table;
+  margin: 20px auto;
+  padding: 20px;
+  border: solid blue;
+  background-color: aqua;
+}
+
+.log-form-content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+#username {
+  margin: 10px;
+}
+
+#password {
+  margin: 10px;
+}
+
+.button {
+  color: aliceblue;
+  background-color: blue;
+  font-size: 50%;
+  margin-left: 50%;
 }
 
 @media only screen and (min-width: 600px) {

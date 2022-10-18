@@ -7,6 +7,7 @@ const loginForm = {
         return res.render("login.pug", {req})
     },
     post: async(req, res) => {
+        console.log(req.body);
         try {
             const user = await db.User.findOne({
                 where: {
@@ -27,6 +28,7 @@ const loginForm = {
             }
             
         } catch (error) {
+            console.log(error);
             return res.render("error", { errors: error.message })
         }
     }

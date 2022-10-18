@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>chat with </title>
+    link(rel="stylesheet", href="/css/chat_page.css")
+  </head>
+  <body>
+    <ul id="messages">
+        if(chats.length > 0)
+            each chat in chats
+                    li= `sender: ${chat.sender.username} --------- ${chat.content}`
+        else
+            p no chat
+    </ul>
+    <form id="form" action="">
+      input(type="hidden", id="groupId", value=`${req.params.groupId}`)
+      input(type="hidden", id="token", value=`${req.headers.authorization}`)
+      <input id="input" autocomplete="off" /><button>Send</button>
+    </form>
+    <script src="/socket.io/socket.io.js"></script>
+    script(src="/js/socketConnection.js")
+  </body>
+</html>

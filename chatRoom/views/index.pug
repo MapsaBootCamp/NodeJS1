@@ -4,8 +4,12 @@ block title
     title HomePage 
 
 block content 
-    ul(id="user-show")
-        each user in users
-            li= user
+    ul(id="chat-list-container")
+        if(chats)
+            each chat in chats
+                a(href=`/chat/${chat.GroupId}`)
+                    div.chat-list-element
+                        li=chat.Group.name
+                        li= JSON.stringify(chat)
     block script
         script(src="js/main.js") 

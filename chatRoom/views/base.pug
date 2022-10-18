@@ -11,12 +11,12 @@ html(lang="en")
         div
             .header
                 p header
+                a(href="/") Home
                 if !req.user
-                    a(href="/auth/login-form") login
+                    a(href="/auth/login-form") Login
                 else 
                     p welcome #{req.user.username}
-                    a(href="/auth/logout") logout
-                a(href="/") home
+                    a(href="/auth/logout") Logout
 
         block content
 

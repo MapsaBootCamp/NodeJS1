@@ -1,3 +1,5 @@
 exports.authAPI = require("./api/auth")
 exports.chatAPI = require("./api/chat")
 exports.authTemplate = require("./view/auth")
+exports.home = require("./view/home")
+exports.chatTemplate = require("./view/chat")

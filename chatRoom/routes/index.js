@@ -14,6 +14,8 @@ const routeAPIDefiner = [
 
 const routeViewsDefiner = [
     ["/auth", require("./view/auth")],
+    ["/", require("./view/home")],
+    ["/chat", require("./view/chat")],
 ]
 
 for(const route of routeAPIDefiner){
