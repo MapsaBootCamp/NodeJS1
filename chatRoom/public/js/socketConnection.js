@@ -22,7 +22,7 @@ const token = getCookie("access-token")
 
 var socket = io(`/chat/${groupId.value}`, {
     query: {
-      groupId: groupId.value
+      groupId: groupId.value,
     },
     auth: {
         token: token
