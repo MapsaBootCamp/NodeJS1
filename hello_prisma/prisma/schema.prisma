@@ -27,6 +27,6 @@ model Todo {
   due_date DateTime?
   description String?
   done Boolean @default(false)
-  category Category @relation(fields: [cat_id], references: [id])
+  category Category @relation(fields: [cat_id], references: [id], onDelete: Cascade)
   cat_id Int
 }
