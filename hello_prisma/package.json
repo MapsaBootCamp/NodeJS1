@@ -2,7 +2,7 @@
   "name": "hello_prisma",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "dist/app.js",
   "scripts": {
     "dev": "concurrently --kill-others \"tsc -w\" \"nodemon dist/app.js\""
   },
