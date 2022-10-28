@@ -4,11 +4,13 @@ import {
     Get,
     HttpException,
     HttpStatus,
+    NotFoundException,
     Param,
     Post,
     Put,
 } from '@nestjs/common';
-import { createTodoDto } from './dto/todo.dto';
+import { CreateTodoDto } from './dto/todo.dto';
+import { UpdateTodoDto } from './dto/update-todo.dto';
 import { Todo } from './entities/todo.entity';
 import { TodoService } from './todo.service';
 
@@ -33,15 +35,32 @@ export class TodoController {
     }
 
     @Post('list')
-    async createTodo(@Body() body: createTodoDto): Promise<Todo> {
+    async createTodo(@Body() body: CreateTodoDto): Promise<Todo> {
         const todo = await this.todoService.createTodo(body);
         return todo;
     }
+    @Get(':id')
+    async getTodo(@Param('id') id: number): Promise<Todo> {
+        try {
+            const todo = await this.todoService.getOneTodo(id);
+            return todo;
+        } catch (error) {
+            throw new NotFoundException(error.message);
+        }
+    }
 
     @Put('/:id')
-    updateTodo(@Param('id') id: number) {}
+    async updateTodo(
+        @Param('id') id: number,
+        @Body() updatedData: UpdateTodoDto,
+    ): Promise<Todo> {
+        try {
+            const todo = await this.todoService.updateTodo(id, updatedData);
+            return todo;
+        } catch (error) {
+            throw new NotFoundException(error.message);
+        }
+    }
 
     deleteTodo() {}
-
-    getTodo() {}
 }

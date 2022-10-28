@@ -1,6 +1,5 @@
-export class createTodoDto {
+export class CreateTodoDto {
     title: string;
     description?: string;
     due_date?: Date;
-    category: string;
 }

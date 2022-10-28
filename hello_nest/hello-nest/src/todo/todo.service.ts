@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { title } from 'process';
-import { Repository } from 'typeorm';
+import { Repository, UpdateResult } from 'typeorm';
+import { UpdateTodoDto } from './dto/update-todo.dto';
 import { Category, Todo } from './entities/todo.entity';
 
 @Injectable()
@@ -17,9 +17,11 @@ export class TodoService {
         return this.todosRepository.find();
     }
     async getOneTodo(id: number): Promise<Todo> {
-        return this.todosRepository.findOneBy({
+        const todo = await this.todosRepository.findOneByOrFail({
             id,
         });
+
+        return todo;
     }
 
     async createTodo(todoData) {
@@ -43,5 +45,16 @@ export class TodoService {
         }
         todo.category = category;
         return await this.todosRepository.save(todo);
+    }
+
+    async updateTodo(id: number, updatedData): Promise<Todo> {
+        await this.todosRepository
+            .createQueryBuilder()
+            .update(updatedData)
+            .where({ id })
+            .execute();
+
+        const result = await this.getOneTodo(id);
+        return result;
     }
 }
