@@ -49,7 +49,7 @@ export class TodoController {
         }
     }
 
-    @Put('/:id')
+    @Put(':id')
     async updateTodo(
         @Param('id') id: number,
         @Body() updatedData: UpdateTodoDto,

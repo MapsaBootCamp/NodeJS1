@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, UpdateResult } from 'typeorm';
+import { Repository } from 'typeorm';
 import { UpdateTodoDto } from './dto/update-todo.dto';
 import { Category, Todo } from './entities/todo.entity';
 
@@ -47,7 +47,7 @@ export class TodoService {
         return await this.todosRepository.save(todo);
     }
 
-    async updateTodo(id: number, updatedData): Promise<Todo> {
+    async updateTodo(id: number, updatedData: UpdateTodoDto): Promise<Todo> {
         await this.todosRepository
             .createQueryBuilder()
             .update(updatedData)
