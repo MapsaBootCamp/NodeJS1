@@ -12,3 +12,10 @@ export class User extends Document {
   password: string;
   addresses: Array<Address>;
 }
+
+export class UserData {
+  id: string;
+  username: string;
+  password?: string;
+  addresses: Array<Address>;
+}
