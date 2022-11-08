@@ -15,4 +15,18 @@ export const userSchema = new mongoose.Schema({
       zipcode: Number,
     },
   ],
+  todos: [
+    {
+      title: {
+        type: String,
+        required: true,
+      },
+      description: String,
+      done: {
+        type: Boolean,
+        default: false,
+      },
+      img: String,
+    },
+  ],
 });
