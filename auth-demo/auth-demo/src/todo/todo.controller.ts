@@ -7,16 +7,25 @@ import {
   UseInterceptors,
   UploadedFile,
   Get,
+  Header,
+  Param,
+  Query,
+  ParseArrayPipe,
+  Put,
+  Delete,
 } from '@nestjs/common';
 import { diskStorage } from 'multer';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { UserService } from 'src/user/user.service';
-import { CreateTodoDto } from './dto/todo.dto';
+import { CreateTodoDto, UpdateTodoDto } from './dto/todo.dto';
 import { existsSync, mkdirSync } from 'fs';
 import { extname } from 'path';
 import { v4 as uuid } from 'uuid';
 import { TodoService } from './todo.service';
+import { ExampleParsePipeInt } from './example.pipe';
+import { ExampleAuthGuard } from './example.gaurd';
+import { DEFAULT_ECDH_CURVE } from 'tls';
 
 @UseGuards(JwtAuthGuard)
 @Controller('todo')
@@ -57,8 +66,31 @@ export class TodoController {
     return await this.todoService.createTodo(createTodo, file, userObj);
   }
 
+  // @UseGuards(ExampleAuthGuard)
   @Get()
-  async getAllTodo(@Request() req) {
+  async getAllTodo(
+    @Request() req,
+    // @Param() username: string,
+    // @Query('users', ExampleParsePipeInt) users: number,
+  ) {
     return await this.todoService.getTodos(req.user.username);
+  }
+
+  @Put(':id')
+  async updateTodo(
+    @Request() req,
+    @Param('id') id: string,
+    @Body() updateTodoData: UpdateTodoDto,
+  ) {
+    return await this.todoService.updateTodo(
+      req.user.username,
+      id,
+      updateTodoData,
+    );
+  }
+
+  @Delete(':id')
+  async deleteTodo(@Request() req, @Param('id') id: string) {
+    return await this.todoService.deleteTodo(req.user.username, id);
   }
 }

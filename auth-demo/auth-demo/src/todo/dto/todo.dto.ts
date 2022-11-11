@@ -1,3 +1,4 @@
+import { PartialType } from '@nestjs/mapped-types';
 import { IsBoolean, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class CreateTodoDto {
@@ -13,3 +14,5 @@ export class CreateTodoDto {
   @IsBoolean()
   done: boolean;
 }
+
+export class UpdateTodoDto extends PartialType(CreateTodoDto) {}
