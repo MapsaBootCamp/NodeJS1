@@ -1,0 +1,26 @@
+version: "3.7"
+
+services:
+  todo_app:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    volumes:
+      - .:/usr/src/app
+    env_file:
+    - .env
+    # Run a command against the development stage of the image
+    command: npm run start:dev
+    depends_on:
+      - mongo_db
+      
+  mongo_db:
+    image: mongo
+    container_name: db_mongo
+    volumes:
+      - mongodata:/data/db
+    ports:
+      - "27017:27017"
+
+volumes:
+  mongodata: 
