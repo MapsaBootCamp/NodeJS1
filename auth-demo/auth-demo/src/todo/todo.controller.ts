@@ -25,8 +25,9 @@ import { v4 as uuid } from 'uuid';
 import { TodoService } from './todo.service';
 import { ExampleParsePipeInt } from './example.pipe';
 import { ExampleAuthGuard } from './example.gaurd';
-import { DEFAULT_ECDH_CURVE } from 'tls';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
+@ApiBearerAuth()
 @UseGuards(JwtAuthGuard)
 @Controller('todo')
 export class TodoController {

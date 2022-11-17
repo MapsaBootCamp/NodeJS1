@@ -1,10 +1,17 @@
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsNotEmpty } from 'class-validator';
 import { Document } from 'mongoose';
 import { Todo } from 'src/todo/types/todo.type';
 
 export class Address {
+  @ApiProperty()
+  @IsNotEmpty()
   state: string;
+  @ApiPropertyOptional()
   city: string;
+  @ApiPropertyOptional()
   street: string;
+  @ApiPropertyOptional()
   zipcode: number;
 }
 

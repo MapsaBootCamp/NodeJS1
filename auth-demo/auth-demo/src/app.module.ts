@@ -6,6 +6,7 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { TodoModule } from './todo/todo.module';
+import { GitApiModule } from './gitApi/gitApi.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { TodoModule } from './todo/todo.module';
     UserModule,
     AuthModule,
     TodoModule,
+    GitApiModule,
   ],
   controllers: [AppController],
   providers: [AppService],

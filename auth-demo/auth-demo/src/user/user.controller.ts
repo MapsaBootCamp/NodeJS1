@@ -7,10 +7,12 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { createUserDto } from './dto/user.dto';
 import { User } from './types/user.type';
 import { UserService } from './user.service';
 
+@ApiTags('Authentication')
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}

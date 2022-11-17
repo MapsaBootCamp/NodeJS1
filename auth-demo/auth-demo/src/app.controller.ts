@@ -8,14 +8,17 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiTags } from '@nestjs/swagger';
 import { AppService } from './app.service';
 import { AuthService } from './auth/auth.service';
 import { AuthenticatedGuard } from './auth/authenticat.gaurd';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
 import { LocalAuthGuard } from './auth/local.auth.gaurd';
+import { UserLoginDto } from './user/dto/user.dto';
 import { User } from './user/types/user.type';
+import { User as UserDecorator } from './user/decorators/user.decorator';
 
+@ApiTags('Authentication')
 @Controller()
 export class AppController {
   constructor(
@@ -24,6 +27,7 @@ export class AppController {
   ) {}
 
   // @UseGuards(LocalAuthGuard)
+  @ApiBody({ type: UserLoginDto })
   @UseGuards(AuthGuard('local'))
   @Post('login')
   async login(@Request() request): Promise<User | { accessToken: string }> {
@@ -33,9 +37,10 @@ export class AppController {
 
   // @UseGuards(AuthenticatedGuard)
   @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @Get('secret')
-  getHello(@Request() req): string {
-    return `hello ${JSON.stringify(req.user)}`;
+  getHello(@UserDecorator('userId') user: string): string {
+    return `hello ${JSON.stringify(user)}`;
   }
 
   @Get('logout')

@@ -81,8 +81,8 @@ export class UserService {
   }
 
   async userCreation(userCreateData: createUserDto): Promise<User> {
-    const { username, password, address } = userCreateData;
-    const user = new this.userModel({ username, password });
+    const { username, password, address, roll } = userCreateData;
+    const user = new this.userModel({ username, password, roll });
     user.addresses.push(address);
     return user.save();
   }
