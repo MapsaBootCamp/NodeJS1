@@ -1,0 +1,57 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Todo {
+  id: Int!
+  title: String!
+  description: String
+  done: Boolean!
+  user: User
+}
+
+type User {
+  id: Int!
+  username: String!
+  todos: [Todo!]
+}
+
+type Query {
+  todos: [Todo!]!
+  todo(id: Int!): Todo!
+  Users: [User!]!
+  User(id: Int!): User!
+}
+
+type Mutation {
+  createTodo(createTodoInput: CreateTodoInput!): Todo!
+  updateTodo(id: Int!, updateTodoInput: UpdateTodoInput!): Todo!
+  removeTodo(id: Int!): Todo!
+  createUser(createUserInput: CreateUserInput!): User!
+}
+
+input CreateTodoInput {
+  """Example field (panir kharidan)"""
+  title: String!
+  description: String
+  done: Boolean
+  userId: Int
+}
+
+input UpdateTodoInput {
+  """Example field (panir kharidan)"""
+  title: String
+  description: String
+  done: Boolean
+  userId: Int
+}
+
+input CreateUserInput {
+  """Example field (abcd)"""
+  username: String!
+  password: String
+}
+
+type Subscription {
+  todoCreated: Todo!
+}
