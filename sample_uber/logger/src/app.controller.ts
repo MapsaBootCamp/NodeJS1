@@ -5,6 +5,7 @@ import {
   GetTripRequestPayload,
   TripRequestLog,
 } from './dto/trip-request-log.dto';
+import { IDriverRequest } from './interfaces/log-driver.interface';
 
 @Controller()
 export class AppController {
@@ -18,5 +19,10 @@ export class AppController {
   @MessagePattern({ cmd: 'trip_request_log' })
   getTripRequests(data: GetTripRequestPayload) {
     return this.appService.getTripRequestLog(data.username);
+  }
+
+  @EventPattern('log_deriver_request')
+  logDriverRequest(data: IDriverRequest) {
+    console.log('LOGGER SERVICE - user: ', data.username);
   }
 }

@@ -21,4 +21,8 @@ export class AppService {
       { username },
     );
   }
+  getDrivers(username: string) {
+    this.clientLoggerService.emit('log_deriver_request', { username });
+    return this.clientUserService.send({ cmd: 'list_drivers' }, {});
+  }
 }

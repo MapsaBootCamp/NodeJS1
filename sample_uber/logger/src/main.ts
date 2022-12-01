@@ -7,6 +7,10 @@ async function bootstrap() {
     LoggerModule,
     {
       transport: Transport.TCP,
+      options: {
+        host: '0.0.0.0',
+        port: +process.env.LOGGER_SERVICE_PORT,
+      },
     },
   );
   await app.listen();

@@ -24,4 +24,9 @@ export class AppController {
   tripRequestLogs(@Query('username') username: string) {
     return this.appService.getTripRequests(username);
   }
+
+  @Get('list-drivers')
+  getDriver(@Query('username') username: string) {
+    return this.appService.getDrivers(username);
+  }
 }
