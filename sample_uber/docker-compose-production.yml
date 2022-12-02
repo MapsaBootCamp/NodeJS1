@@ -1,9 +1,7 @@
 services:
 
   gateway:
-    build:
-      context: ./gateway
-      dockerfile: develope.Dockerfile
+    build: ./gateway
     user: root
     ports:
       - 8080:5000
