@@ -5,13 +5,10 @@ import {
   IsArray,
   IsEmpty,
   IsEnum,
+  IsOptional,
 } from 'class-validator';
 import { Address } from '../types/user.type';
-
-enum Roll {
-  admin,
-  user,
-}
+import { Role } from '../role.enum';
 
 export class createUserDto {
   @IsNotEmpty()
@@ -33,8 +30,9 @@ export class createUserDto {
   @ApiPropertyOptional({ type: Address })
   address?: Address;
 
-  @IsEnum(Roll)
-  roll: Roll;
+  @IsEnum(Role)
+  @IsOptional()
+  roll: Role;
 }
 
 export class UserLoginDto {

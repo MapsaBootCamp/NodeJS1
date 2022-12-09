@@ -8,6 +8,7 @@ const userRoute = require("./routes/user.route");
 const courseRoute = require("./routes/course.route");
 const { User } = require("./models/user.model");
 const isLoggedIn = require("./midllewares/loginRequired");
+const {getData} = require("./hello_redis")
 
 dbConnect();
 
@@ -48,6 +49,7 @@ passport.deserializeUser(User.deserializeUser());
 app.get("/", async (req, res) => {
   try {
     // await redisClient.v4.set('name', 'Asghar')
+    console.log(await getData("user:912123456789"));
     const cached_name = await redisClient.v4.get('name')
     console.log(cached_name);
     req.session.count === undefined ? req.session.count = 0 : req.session.count++

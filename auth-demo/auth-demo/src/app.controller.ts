@@ -17,6 +17,9 @@ import { LocalAuthGuard } from './auth/local.auth.gaurd';
 import { UserLoginDto } from './user/dto/user.dto';
 import { User } from './user/types/user.type';
 import { User as UserDecorator } from './user/decorators/user.decorator';
+import { Roles } from './user/role.decorator';
+import { Role } from './user/role.enum';
+import RoleGuard from './role.guard';
 
 @ApiTags('Authentication')
 @Controller()
@@ -41,6 +44,13 @@ export class AppController {
   @Get('secret')
   getHello(@UserDecorator('userId') user: string): string {
     return `hello ${JSON.stringify(user)}`;
+  }
+
+  @Roles(Role.Admin)
+  @UseGuards(JwtAuthGuard, RoleGuard)
+  @Get('admin')
+  admiin() {
+    return 'hello admin';
   }
 
   @Get('logout')

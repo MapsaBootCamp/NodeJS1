@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { Role } from '../role.enum';
 
 export const userSchema = new mongoose.Schema({
   username: {
@@ -7,7 +8,11 @@ export const userSchema = new mongoose.Schema({
     required: true,
   },
   password: String,
-  roll: String,
+  roll: {
+    type: String,
+    enum: Role,
+    default: Role.User,
+  },
   addresses: [
     {
       state: String,

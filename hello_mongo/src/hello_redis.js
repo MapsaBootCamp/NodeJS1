@@ -10,8 +10,16 @@ client.connect().then((msg) => console.log("connected to rediis!"))
 
 async function redisTest(){
     const random_key = Math.random() * 1000
-    await client.set("user:912123456789", random_key, { EX: 60 })
+    await client.set("user:912123456789", random_key, { EX: 360 })
 }
+
+async function getData(keyName){
+    return await client.get(keyName)
+}
+
 
 redisTest()
 
+module.exports = {
+    getData
+}

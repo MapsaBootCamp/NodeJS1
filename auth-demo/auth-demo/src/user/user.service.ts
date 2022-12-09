@@ -73,6 +73,7 @@ export class UserService {
       id: user._id,
       username: user.username,
       addresses: user.addresses,
+      role: user.roll,
     };
   }
   async findOneUser(username: string): Promise<User | undefined> {
