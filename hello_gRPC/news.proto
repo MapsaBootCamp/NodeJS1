@@ -12,6 +12,15 @@ message News {
     string content = 4;
 }   
 
+message newNews {
+    string title = 2;
+    enum Category {
+        Sport = 1;
+        Politic = 2;
+    }
+    Category category = 3;
+    string content = 4;
+}
 
 message NewsList {
     repeated News news = 1;
@@ -25,7 +34,7 @@ message NewsId {
 }
 
 service NewService {
-    rpc getAllNews (Empty) returns (NewsList);
-    rpc getNewsDetail (NewsId) returns (News);
-    rpc createNews (News) returns (News)
+    rpc getAllNews (Empty) returns (NewsList){};
+    rpc getNewsDetail (NewsId) returns (News){};
+    rpc createNews (newNews) returns (News){};
 }
