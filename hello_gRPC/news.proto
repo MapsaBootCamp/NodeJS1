@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+
+message News {
+    int32 id = 1;
+    string title = 2;
+    enum Category {
+        Sport = 1;
+        Politic = 2;
+    }
+    Category category = 3;
+    string content = 4;
+}   
+
+
+message NewsList {
+    repeated News news = 1;
+}
+
+message Empty {}
+
+
+message NewsId {
+    int32 id = 1;
+}
+
+service NewService {
+    rpc getAllNews (Empty) returns (NewsList);
+    rpc getNewsDetail (NewsId) returns (News);
+    rpc createNews (News) returns (News)
+}
